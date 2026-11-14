@@ -1,0 +1,27 @@
+# Jekyll settings for GitHub Pages.
+# Docs: https://github.com/25070270CYS/cybersecurity-portfolio
+
+title: Yan Shen — Cybersecurity Portfolio
+description: >-
+  A public record of my cybersecurity project work for WQE7001 Cyber Security:
+  an isolated virtual lab, a network service scan, and what I learned from both.
+theme: minima
+lang: en
+
+author: Yan Shen
+
+# Plugins that GitHub Pages builds for us (both are on the GitHub Pages allow-list).
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# No blog posts, so keep the theme minimal.
+show_excerpts: false
+minima:
+  skin: classic
+
+# Nothing else belongs in the top navigation; the whole portfolio is the home page.
+header_pages: []
+
+# GitHub Pages serves this repository from /cybersecurity-portfolio/, so all
+# internal links in this repository are written as relative paths.
