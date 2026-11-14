@@ -29,3 +29,7 @@ A public record of my cybersecurity project work for **WQE7001 Cyber Security**:
 ## Submission
 
 This repository is marked at the release tag [`v1.0-submission`](releases/tag/v1.0-submission).
+
+## How this site is built
+
+Written in Markdown, built by Jekyll with the minima theme, and deployed from the `main` branch by GitHub Pages.
