@@ -1,0 +1,51 @@
+# ---------------------------------------------------------------------------
+# Secrets and local configuration — never publish these
+# ---------------------------------------------------------------------------
+.env
+.env.*
+*.key
+*.pem
+*.p12
+id_rsa*
+secrets.yml
+credentials*
+*.kdbx
+
+# ---------------------------------------------------------------------------
+# Lab artefacts and large binaries
+# Keep VM images, installers and raw captures out of git; publish small,
+# sanitised extracts (a cropped screenshot, a trimmed log) in evidence/
+# ---------------------------------------------------------------------------
+*.ova
+*.ovf
+*.vmdk
+*.vdi
+*.iso
+*.pcap
+*.pcapng
+*.cap
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.exe
+*.msi
+
+# ---------------------------------------------------------------------------
+# Jekyll build output
+# ---------------------------------------------------------------------------
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+Gemfile.lock
+
+# ---------------------------------------------------------------------------
+# Operating system and editor noise
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
