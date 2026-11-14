@@ -43,15 +43,27 @@ The topology is deliberately flat for the first project: one segment, two guests
 
 ## Results and evidence
 
-| Evidence | What it shows |
-| --- | --- |
-| `evidence/01-isolation-check.png` | No default route and no route off the segment — `Network is unreachable`, not a timeout |
-| `evidence/02-gns3-topology.png` | The GNS3 topology: Kali and Metasploitable 2 on `Switch1`, `R1` attached to the same segment |
-| `evidence/03-kali-address-and-ping.png` | Kali's interface and address, and 4/4 replies from the target at sub-millisecond times |
-| `evidence/04-target-address.png` | The target's interface, address and MAC address |
-| `evidence/05-target-to-kali-ping.png` | The reverse path replies as well, so connectivity is not one-directional |
-
 **Outcome.** Both guests run, hold the intended addresses, and reach each other with no packet loss in either direction. The boundary is just as clear: Kali has no default route, so `ping 8.8.8.8` fails with `Network is unreachable`. That distinction matters — a timeout would have left me wondering whether something was silently dropping the packets; "unreachable" says the kernel had no route to send them in the first place. Snapshots give a repeatable baseline, and the same two machines are the subject of [Project 2](../nmap-service-scan/).
+
+![ping to a public address fails with Network is unreachable, and ip route shows only the lab subnet](evidence/01-isolation-check.png)
+
+**`01-isolation-check.png`** — the isolation check. `ping 8.8.8.8` cannot even leave the host, and `ip route` holds one link route and no default gateway.
+
+![GNS3 topology with Kali, Metasploitable 2, Switch1 and R1](evidence/02-gns3-topology.png)
+
+**`02-gns3-topology.png`** — the topology in GNS3: two VMware guests on `Switch1`, with `R1` attached to the same segment.
+
+![ifconfig on Kali showing 192.168.62.129 and four replies from the target](evidence/03-kali-address-and-ping.png)
+
+**`03-kali-address-and-ping.png`** — Kali's address, and 4/4 replies from the target at well under a millisecond.
+
+![ifconfig on Metasploitable 2 showing 192.168.62.130](evidence/04-target-address.png)
+
+**`04-target-address.png`** — the target's address and MAC address.
+
+![ping from the target back to Kali, four replies](evidence/05-target-to-kali-ping.png)
+
+**`05-target-to-kali-ping.png`** — the reverse path replies too, so connectivity is not one-directional.
 
 ## What I would do differently
 
