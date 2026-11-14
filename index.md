@@ -46,7 +46,7 @@ I started this course able to follow instructions and not much else. What has ch
 
 ### Two labs, and what I took from each
 
-The Wireshark labs (9.2.6 and 10.2.7) changed how I read a capture. Following a TCP handshake and then the same conversation in DNS made the layers stop being a diagram: I could point at the sequence number that shows a retransmission, or at the query that explains a delay the browser would have blamed on the server. The Nmap lab (9.3.8) was the other one. Running a scan is a five-minute exercise; deciding what the output means took me far longer, and that is the part I kept. A port is not a finding. A product and a version is a finding, and only then can you say what it exposes.
+The Wireshark labs changed how I read a capture. Following a TCP handshake and then the same conversation in DNS made the layers stop being a diagram: I could point at the sequence number that shows a retransmission, or at the query that explains a delay the browser would have blamed on the server. The Nmap lab was the other one. Running a scan is a five-minute exercise; deciding what the output means took me far longer, and that is the part I kept. A port is not a finding. A product and a version is a finding, and only then can you say what it exposes.
 
 ### What went wrong, and how I fixed it
 
