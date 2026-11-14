@@ -63,13 +63,21 @@ nmap -sV -n -p 21,22,23,25,53,80,111,139,445,512,513,514,1099,1524,2049,2121,330
 
 ### What went wrong: a scan that looked hung
 
-The first `nmap -sV` run printed `Parallel DNS resolution of 1 host`, then sat at `0 hosts completed (0 up), 1 undergoing ARP Ping Scan` long enough to look dead. The capture in `screenshots/01-stalled-scan.png` shows six consecutive statistic lines between 19 and 21 seconds, every one of them `0 hosts completed` — that is not a slow scan, it is a scan waiting for a reply that never arrives. The obvious suspect was the GNS3 link, so that is what I checked first: `ping -c 4` in both directions returned 4/4 replies at well under a millisecond. The network was fine.
+The first `nmap -sV` run printed `Parallel DNS resolution of 1 host`, then sat at `0 hosts completed (0 up), 1 undergoing ARP Ping Scan` long enough to look dead. The capture in `evidence/screenshots/01-stalled-scan.png` shows six consecutive statistic lines between 19 and 21 seconds, every one of them `0 hosts completed` — that is not a slow scan, it is a scan waiting for a reply that never arrives. The obvious suspect was the GNS3 link, so that is what I checked first: `ping -c 4` in both directions returned 4/4 replies at well under a millisecond. The network was fine.
+
+![nmap statistics stuck at zero hosts completed while an ARP ping scan runs](evidence/screenshots/01-stalled-scan.png)
+
+**`01-stalled-scan.png`** — six statistics lines between nineteen and twenty-one seconds, and not one host completed. That is a scan waiting for something, not a slow scan.
 
 That left the two things nmap was doing besides scanning: reverse-DNS lookups, and ARP host discovery. Adding `-n` removed DNS and the same scan finished in 11.36 seconds with the host reported up — so the stall was DNS, on a lab network with no resolver to answer it, and neither host discovery nor the virtual link was at fault. The `-Pn` run then served as an independent confirmation: identical ports, identical versions.
 
 ## Results
 
 30 of the 65,535 TCP ports were open. 65,505 were closed and **none were filtered** — every port answered one way or the other, which means no host firewall is running and nothing in the path is filtering. That is a finding in its own right: the only thing between an attacker and these services is whether they know the port is there.
+
+![the full TCP scan listing thirty open ports](evidence/screenshots/04-full-tcp-scan.png)
+
+**`04-full-tcp-scan.png`** — the `-p-` scan: thirty open ports out of 65,535, finished in 1.29 seconds.
 
 | Port | Service | Version | Why it matters |
 | --- | --- | --- | --- |
@@ -155,7 +163,7 @@ The `vuln` scripts go further than fingerprinting: two of them proved their find
 | `evidence/04-nse-default.txt` | Anonymous FTP, SSLv2 on SMTP, the rpcbind table, SMB signing, IRC and VNC details |
 | `evidence/05-rpcinfo.txt` | The portmapper table on its own, including the port that is not in it |
 | `evidence/06-nse-vuln.txt` | Which findings are confirmed, which scripts failed, and what they proved |
-| `screenshots/` | Terminal captures of each step, from the stalled scan (`01-stalled-scan.png`) to the script output |
+| `evidence/screenshots/` | Terminal captures of each step, from the stalled scan (`01-stalled-scan.png`) to the script output |
 
 ## What I would do differently
 
