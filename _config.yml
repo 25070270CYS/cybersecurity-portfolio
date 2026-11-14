@@ -20,8 +20,12 @@ show_excerpts: false
 minima:
   skin: classic
 
-# Nothing else belongs in the top navigation; the whole portfolio is the home page.
-header_pages: []
+# Keep the top navigation to the two projects. The portfolio's seven sections
+# live on the home page, and the evidence folders are supporting material for
+# the write-ups rather than pages in their own right.
+header_pages:
+  - projects/virtual-lab-setup/README.md
+  - projects/nmap-service-scan/README.md
 
 # GitHub Pages serves this repository from /cybersecurity-portfolio/, so all
 # internal links in this repository are written as relative paths.
